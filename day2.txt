@@ -1,0 +1,11 @@
+import random
+guess=random.randint(1,100)
+while True:
+    n=float(input('输入一个1-100内的数'))
+    if n<guess:
+        print('猜小了,再来一次吧！')
+    elif n>guess:
+            print('猜大了，再来一次吧！')
+    else:
+        print('恭喜你，猜对了哦！')
+        break
