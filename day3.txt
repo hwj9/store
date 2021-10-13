@@ -1,0 +1,179 @@
+#实现输入10个数字，并打印10个数的求和结果
+#从键盘依次输入10个数，最后打印最大的数、10个数的和、和平均数。
+# list=[]
+# max=0
+# sum=0
+# averg=0
+# for i in range(0,10):
+#     a=int(input('请输入一个数：'))
+#     list.append(a)
+#     print(list)
+#     sum = sum+a
+#     averg=sum/2
+#     if a>max:
+#         max = a
+# print('最大值为：',max)
+# print('求和总值：',sum)
+# print('平均数值：',averg)
+
+
+#使用random模块，如何产生 50~150之间的数？
+# import random
+# list=int(random.randint(50,150))
+# while True:
+#     n=float(input('输入一个数字'))
+#     print(list)
+#     break
+
+
+#从键盘输入任意三边，判断是否能形成三角形，若可以，则判断形成什么三角形
+# （结果判断：等腰，等边，直角，普通，不能形成三角形。）
+# a=int(input('请输入三角形的边长：'))
+# b=int(input('请输入三角形的边长：'))
+# c=int(input('请输入三角形的边长：'))
+# while True:
+#     if a+b>c or a+c>b or b+c>a :
+#         print('能形成三角形')
+#         if a==b==c:
+#             print('能形成等边三角形')
+#         elif a ==b or a == c or b == c:
+#             print('能形成等腰三角形')
+#         elif a*a+b*b==c*c or a*a+c*c==b*b or c*c+b*b==a*a:
+#             print('能形成直角三角形')
+#         else:
+#             print('能形成普通三角形')
+#     else:
+#         print('不能形成三角形')
+#     break
+
+
+# 有以下两个数，使用+，-号实现两个数的调换。
+# A=56  B=78
+# 实现效果：# A=78  B=56
+# A=input('输入数字A=')
+# B=input('输入数字B=')
+# input('+')
+# A1=B
+# B1=A
+# print('A=',A1)
+# print('B=',B1)
+# input('-')
+# A2=B1
+# B2=A1
+# print('A=',A2)
+# print('B=',B2)
+
+
+#实现登陆系统的三次密码输入错误锁定功能（用户名：root,密码：admin）
+# name="root"
+# password="admin"
+# num=0
+# import time
+# print("欢迎登录该系统，祝您使用愉快！")
+# while num<3:
+#     n = input("请输入用户名：")
+#     p = input("请输入用户密码：")
+#     if n==name and p==password:
+#         print('登陆成功')
+#         break
+#     else:
+#         print("登录失败，请检查账号密码信息！")
+#         num+=1
+#         if num==3:
+#             print("抱歉，密码输入错误已超过3次,1秒后自动锁屏")
+#             for i in range(3):
+#                 print('剩余',3-i,'秒')
+#                 time.sleep(1)
+
+
+#编程实现下列图形的打印
+# num1=int(input())
+# for i in range(1,num1+1):
+#     print((num1-i)*' ',i*'* ')
+
+
+#使用while循环实现99乘法表的打印
+# n=1
+# while n<=9:
+#     m=1
+#     while m<=n:
+#         print(f'{n}*{m}={n*m}',end='  ')
+#         m=m+1
+#     n=n+1
+#     print()
+
+
+#一只青蛙掉在井里了，井高20米，青蛙白天网上爬3米，
+#晚上下滑2米，问第几天能出来？请编程求出
+# h = 20
+# u = 3
+# d = 2
+# day =0
+# while h > 0:
+#     h = h-u
+#     day +=1
+#     if h <=0:
+#         break
+#     h = h+d
+# print("恭喜你成功爬出，一共用了",day,"天")
+
+
+#猜大小:1.添加计数打印功能 2.添加次数金币功能和锁定系统功能。
+# import random
+# import time
+# guess=random.randint(1,100)
+# print(guess)
+# i=1
+# goal=0
+# while True:
+#     n=float(input('输入一个1-100内的数'))
+#     print("这是第",i,"次猜数字")
+#     if n<guess:
+#         print('猜小了,再来一次吧！')
+#         i+=1
+#     elif n>guess:
+#             print('猜大了，再来一次吧！')
+#             i+=1
+#     else:
+#         print('恭喜你，猜对了哦！')
+#         if i<=3:
+#             goal+=10
+#             print("真不错，奖励你十金币")
+#         elif 3<i<10:
+#             goal+=3
+#             print("还行，奖励你三个")
+#         else:
+#             goal-=5
+#             print("垃圾，滚")
+#         break
+#     if i>10:
+#         for n in range(3):
+#             print(3-n,"S后继续")
+#             time.sleep(1)
+#     i=1
+
+
+#用循环来实现20以内的数的阶乘。（1! +2!+3!+…..+20!）
+# num = 1
+# sum = 0
+# for i in range(1,21):
+#     num *=i
+#     sum +=num
+#     print(f'{i}的阶乘为{num}')
+#     print("阶乘之和为：",sum)
+
+
+#随机生成一个处罚遍数
+# import random
+# list=['吴邪','张起灵','王胖子','阿宁','苏难','黎簇']
+# print("============欢迎来到处罚系统===============")
+# while True:
+#     a=input("输入1开始选人")
+#     ran=random.randint(0,len(list)-1)
+#     print('就你了，小可怜：',list[ran])
+#     b=input("输入2开始生成处罚编数")
+#     num=random.randint(0,100)
+#     print("恭喜你，处罚次数：",num)
+#     input()
+#     print("哇哦！",list[ran],"处罚了",num,"遍")
+#     break
