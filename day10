@@ -1,0 +1,210 @@
+学生、
+class student:
+    __name = ""
+    __age = 0
+
+    def setname(self,name):
+        self.__name=name
+
+    def getname(self):
+        return  self.__name
+
+    def setage(self, age):
+        if age < 0 or age > 120:
+            print("年龄非法！")
+        else:
+            self.__age = age
+
+    def getage(self):
+        return self.__age
+
+    def showMe(self):
+        print("大家好，我叫",self.__name,"今年",self.__age,"岁了。")
+
+    def compare(self, student):  # self代表我自己    student代表另一个人
+        if self.__age > student.getage():
+            print("我",self.__name,"比同桌大",(self.__age - student.getage()),"岁！")
+        elif self.__age < student.getage():
+            print("我",self.__name,"比同桌小",(student.getage() - self.__age),"岁！")
+        else:
+            print("我俩一样大！")
+
+s = student()
+s.setname("杨幂")
+s.setage(34)
+
+s1 = student()
+s1.setname("易烊千玺")
+s1.setage(21)
+
+s.showMe()
+s1.showMe()
+
+s.compare(s1)
+s1.compare(s)
+
+空调、
+class airc:
+    __brand=""
+    __price= 0
+
+    def setbrand(self,brand):
+        if brand == '':
+            print("空调的品牌名为：")
+        else:
+            self.__brand = brand
+
+    def getbrand(self):
+        return self.__brand
+
+    def setprice(self,price):
+        if price=="":
+            print("该品牌的空调价格为：")
+        else:
+            self.__price = price
+
+    def getprice(self):
+        return self.__price
+
+    def open(self):
+        print("空调开机了...")
+
+    def time(self,time):
+        print("空调将在",time,"分钟后自动关闭...")
+
+    def showMe(self):
+        print("我是"
+              ,self.__brand
+              ,"变频空调，我具有开关机和定时功能，双十一劲报价，只要"
+              ,self.__price,"元")
+
+a = airc()
+
+a.setbrand("美的")
+a.setprice(6999)
+a.open()
+a.time("15")
+a.showMe()
+
+需求编程
+#i.定义了一个学生类：
+# 属性:学号，姓名，年龄，性别，身高，体重，成绩，家庭地址，电话号码。
+# 行为：
+# 学习（要求参数传入学习的时间），
+# 玩游戏（要求参数传入游戏名），
+# 编程（要求参数传入写代码的行数），
+# 数的求和（要求参数用变长参数来做，返回求和结果）
+
+# class student:
+#     __number=0
+#     __name=""
+#     __age=0
+#     __sex=""
+#     __hight=0.00
+#     __weight=0
+#     __code=0.0
+#     __address=""
+#     __phone=0
+#
+#     def setname(self,name):
+#         self.__name=name
+#
+#     def getname(self):
+#         return  self.__name
+#
+#     def setnumber(self,number):
+#         self.__number=number
+#
+#     def getnumber(self):
+#         return  self.__number
+#
+#     def setage(self, age):
+#         if age < 0 or age > 120:
+#             print("年龄非法！")
+#         else:
+#             self.__age = age
+#
+#     def getage(self):
+#         return self.__age
+#
+#     def setsex(self, sex):
+#         self.__sex = sex
+#
+#     def getsex(self):
+#         return self.__sex
+#
+#     def sethight(self, hight):
+#         self.__hight = hight
+#
+#     def gethight(self):
+#         return self.__hight
+#
+#     def setweight(self, weight):
+#         self.__weight = weight
+#
+#     def getweight(self):
+#         return self.__weight
+#
+#     def setcode(self, code):
+#         self.__code = code
+#
+#     def getcode(self):
+#         return self.__code
+#
+#     def setaddress(self,address):
+#         self.__address =address
+#
+#     def getaddress(self):
+#         return self.__address
+#
+#     def setphone(self,phone):
+#         self.__phone =phone
+#
+#     def getphone(self):
+#         return self.__phone
+#
+#     def study(self, time):
+#         print(self.__name, "今天很开心，学习了", time, "小时！")
+#
+#     def play(self, game):
+#         print(self.__name, "学习累了之后，又开始玩", game)
+#
+#     def program(self, cows):
+#         print("另外", self.__name, "的生活很充实，还自学了编程，今天写了", cows, "行代码。")
+#
+#     def sum_count(self):
+#         a = int(input("第一个数："))
+#         b = int(input("第二个数："))
+#         c = a+b
+#         print(c)
+#
+#     def showMe(self):
+#         print("大家好，我叫",self.__name
+#               ,"性别",self.__sex
+#               ,"我的学号是",self.__number
+#               ,"我今年",self.__age,"岁"
+#               ,"身高",self.__hight,"米"
+#               ,"体重",self.__weight,"公斤"
+#               ,"这学期的成绩节点为",self.__code,"分"
+#               ,"现居家庭地址是",self.__address
+#               ,"欢迎各位电话联系",self.__phone)
+#
+# s = student()
+#
+# s.setnumber(2021112101)
+# s.setage(24)
+# s.setsex("男")
+# s.sethight(1.88)
+# s.setweight(50)
+# s.setcode(99.0)
+# s.setaddress("种花街")
+# s.setphone(110112119)
+#
+# s.setname("八戒")
+# s.study("24")
+# s.play("开心消消乐")
+# s.program(500)
+# s.sum_count()
+# s.showMe()
+
+
