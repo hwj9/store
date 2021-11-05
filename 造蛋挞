@@ -1,0 +1,68 @@
+import threading
+from threading import Thread
+import time
+
+basket = 0
+lock = threading.Lock()
+bank=0
+
+class Cake(Thread):
+    cooker = ""
+    count = 0
+
+    def run(self) -> None:
+        global basket, money
+        while True:
+            if basket < 500:
+                self.count = self.count + 1
+                money = float(1.5 * self.count)
+                basket = basket + 1
+                bank = self.count * 3 - money
+                lock.acquire()
+                print(self.cooker, "已经造了", self.count, "个蛋挞", "，篮子里还可以装", 500 - basket, "个蛋挞")
+                print("收银台：",bank)
+                lock.release()
+            else:
+                time.sleep(3)
+                basket = 0
+
+
+class Buy(Thread):
+    customer = ""
+    bag = 3000
+    count = 0
+    def run(self) -> None:
+        while True:
+            global basket
+            if basket > 0 and self.bag>=3:
+                self.count += 1
+                self.bag-=3
+                basket-=1
+                lock.acquire()
+                print(self.customer, "一共买了", self.count, "蛋挞","花了",self.count*3,"元")
+                lock.release()
+            else:
+                time.sleep(2)
+                basket = 500
+
+c1 = Cake()
+c2 = Cake()
+c3 = Cake()
+c1.cooker = 'c1'
+c2.cooker = 'c2'
+c3.cooker = 'c3'
+
+c1.start()
+c2.start()
+c3.start()
+
+b1 = Buy()
+b2 = Buy()
+b3 = Buy()
+b1.customer = 'b1'
+b2.customer = 'b2'
+b3.customer = 'b3'
+
+b1.start()
+b2.start()
+b3.start()
