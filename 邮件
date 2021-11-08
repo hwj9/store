@@ -1,0 +1,167 @@
+Calc.py：
+
+class Calc:
+    def add(self,a,b):
+        return a+b
+
+    def minus(self,a,b):
+        return a-b
+
+    def multi(self,a,b):
+        return a*b
+
+    def devision(self,a,b):
+        return a/b
+
+# 准备数据
+a=6
+b=5
+# 期望结果
+c=11
+# 执行测试
+# --创建对象
+calc=Calc()
+#--调用得出实际结果
+s=calc.add(a,b)
+# 对比实际结果与期望结果是否一样，看用例是否通过
+if s != c:
+    print("用例不通过")
+else:
+    print("用例通过")
+
+---------------------------------------------------
+TestCalc.py：
+
+from Calc import Calc
+
+from unittest import TestCase
+
+class TestCalcadd(TestCase):
+    def testAdd1(self):
+        #
+        a=6
+        b=5
+        s=11
+
+        calc=Calc()
+        sum=calc.add(a,b)
+        self.assertEquals(s,sum)
+
+    def testAdd2(self):
+        #
+        a=-6
+        b=+5
+        s=-1
+
+        calc=Calc()
+        sum=calc.add(a,b)
+        self.assertEquals(s,sum)
+
+class TestCalcminus(TestCase):
+    def testminus1(self):
+        #
+        a=6
+        b=5
+        s=1
+
+        calc=Calc()
+        sum=calc.minus(a,b)
+        self.assertEquals(s,sum)
+
+    def testminus2(self):
+        #
+        a=-6
+        b=5
+        s=-11
+
+        calc=Calc()
+        sum=calc.minus(a,b)
+        self.assertEquals(s,sum)
+
+class TestCalcmulti(TestCase):
+    def testmulti1(self):
+        #
+        a=-6
+        b=-5
+        s=30
+
+        calc=Calc()
+        sum=calc.multi(a,b)
+        self.assertEquals(s,sum)
+
+    def testmulti2(self):
+        #
+        a=-6
+        b=5
+        s=-30
+
+        calc=Calc()
+        sum=calc.multi(a,b)
+        self.assertEquals(s,sum)
+
+class TestCalcdevision(TestCase):
+    def testdevision1(self):
+        #
+        a=30
+        b=-5
+        s=-6
+
+        calc=Calc()
+        sum=calc.devision(a,b)
+        self.assertEquals(s,sum)
+
+    def testdevision2(self):
+        #
+        a=30
+        b=6
+        s=5
+
+        calc=Calc()
+        sum=calc.devision(a,b)
+        self.assertEquals(s,sum)
+
+----------------------------------------------------------
+main.py:
+
+from HTMLTestRunner import HTMLTestRunner
+import unittest
+
+#1、加载所有用例
+#--------------默认加载器------寻找---------------地址---------------匹配规则，以Test开头，模糊匹配
+tests=unittest.defaultTestLoader.discover(r"E:\pythoncode\project1\day13",pattern="Test*.py")
+
+#2、创建运行qi
+runner=HTMLTestRunner.HTMLTestRunner(
+    title="计算器的测试报告", #主标题
+    description="这是加、减、乘、除法的测试报告", #副标题
+    verbosity=1,  #报告的详细程度，默认1
+    #------------------------------#写write---------#防乱码
+    stream= open(file="计算器.html",mode="w+",encoding="utf-8"))
+
+#3、执行用例(用runner执行test)
+runner.run(tests)
+
+-----------------------------------------------------------
+邮件.py
+
+import zmail
+# from Tools.scripts.which import msg
+#file = open(r'E:\pythoncode\project1\day13\计算器.html','r',encoding ='utf-8')
+#msg = file.read()
+with open('E:\pythoncode\project1\day13\计算器.html','r',encoding='utf-8') as fp:
+    content_html=fp.read()
+
+msg_content={
+    'subject':'主题：计算器的测试报告',
+    'content_html':content_html,
+    'attachments':'计算器.html'
+}
+
+reviceser='2431320433@qq.com'
+
+sender={'username':'2712404814@qq.com','pwd':'egfomsgjyfbgdcif'}
+
+#server=zmail.server('2712404814@qq.com','egfomsgjyfbgdcif')
+server=zmail.server(sender['username'],sender['pwd'])
+server.send_mail(reviceser,msg_content)
+
