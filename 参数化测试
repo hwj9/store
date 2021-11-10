@@ -1,0 +1,248 @@
+参数化测试：
+
+from unittest import TestCase
+from ddt import  ddt
+from ddt import data
+from ddt import unpack
+from 中国工商银行 import bank_addUser,putmoney
+from openpyxl import load_workbook
+import openpyxl
+
+#----------获取测试用例
+wb = openpyxl.load_workbook(r"E:\python日常课程\day14【参数化测试】\Bank.xlsx")
+sheet1 = wb["Sheet1"]
+
+# 数据源
+da = []
+for m in range(2,8):
+    for i in sheet1.iter_rows(min_row=m,max_row=m,min_col=2,max_col=9):
+        for j in i:
+            da.append(j.value)
+    da.append(m)
+print(da)
+
+da_len = int((len(da)/6))
+list_of_group = zip(*(iter(da),)*da_len)
+da = [list(i) for i in list_of_group]
+print(da)
+
+#-------------调用测试用例开始使用
+# #创建方法 这个类就是参数化类
+@ddt
+class TestBank(TestCase):
+
+    @data(*da)
+    @unpack  #解包
+    def testAdd(self,a, b, c, d, e, f, g, h, m):
+        valuse = bank_addUser(a, b, c, d, e, f, g)
+        wb1 = wb.active  #------打开,写入
+        if valuse == h:
+            wb1.cell(m, 10, "通过")
+        else:
+            wb1.cell(m, 10, "不通过")
+        wb.save(r"E:\python日常课程\day14【参数化测试】\Bank.xlsx")  #存入工作簿
+        # 断言
+        self.assertEqual(valuse, h)
+
+wb = openpyxl.load_workbook(r"E:\python日常课程\day14【参数化测试】\Bank.xlsx")
+sheet = wb["Sheet2"]
+
+da = []
+for m in range(2, 7):
+    for i in sheet.iter_rows(min_row=m, max_row=m, min_col=1, max_col=3):
+        for j in i:
+            da.append(j.value)
+    da.append(m)
+print(da)
+
+da_len = int((len(da) / 5))
+list_of_group = zip(*(iter(da),) * da_len)
+da = [list(i) for i in list_of_group]
+print(da)
+
+@ddt
+class TestBank(TestCase):
+
+    @data(*da)
+    @unpack  # 解包
+    def testSave(self,a,b,h,m):
+        valuse=putmoney(a,b)
+        wb1 = wb.active
+        if valuse == h:
+            wb1.cell(m, 4, "pass")
+        else:
+            wb1.cell(m, 4, "no pass")
+        wb.save(r"E:\python日常课程\day14【参数化测试】\Bank.xlsx")
+        self.assertEqual(h,valuse)
+
+
+发送邮件：
+
+import zmail
+msg_content={
+    'subject':'主题：测试报告',
+    'headers':'测试报告',
+    'attachments':r'E:\python日常课程\day14【参数化测试】\Bank.xlsx'
+}
+
+reviceser='2082588993@qq.com'
+
+sender={'username':'2712404814@qq.com','pwd':'egfomsgjyfbgdcif'}
+
+#server=zmail.server('2712404814@qq.com','egfomsgjyfbgdcif')
+server=zmail.server(sender['username'],sender['pwd'])
+server.send_mail(reviceser,msg_content)
+
+中国工商银行：
+
+import random
+print("*****************************")
+print("*    中国工商银行             *")
+print("*****************************")
+print("*    账号管理系统             *")
+print("*****************************")
+print("*      1、开户               *")
+print("*      2、存钱               *")
+print("*      3、取钱               *")
+print("*      4、转账               *")
+print("*      5、查询               *")
+print("*      6、Bye               *")
+print("*****************************")
+
+bank={
+795287 : {'username': 'fbi', 'password': 123456, 'country': 'ctx', 'province': 'mad', 'street': 'fwu', 'door': 'tgc', 'money': 261009, 'bank_name': '中国工商银行'} ,
+396972 : {'username': 'ipy', 'password': 123456, 'country': 'zhm', 'province': 'ywi', 'street': 'tio', 'door': 'mgl', 'money': 821172, 'bank_name': '中国工商银行'} ,
+798497 : {'username': 'lmi', 'password': 123456, 'country': 'qvj', 'province': 'hif', 'street': 'wif', 'door': 'dfb', 'money': 447501, 'bank_name': '中国工商银行'} ,
+957460 : {'username': 'hru', 'password': 123456, 'country': 'kkh', 'province': 'cks', 'street': 'qmw', 'door': 'llk', 'money': 951537, 'bank_name': '中国工商银行'} ,
+882168 : {'username': 'qda', 'password': 123456, 'country': 'hjy', 'province': 'sng', 'street': 'jyw', 'door': 'rjw', 'money': 189136, 'bank_name': '中国工商银行'} ,
+604693 : {'username': 'zdw', 'password': 123456, 'country': 'yqs', 'province': 'uhl', 'street': 'lcm', 'door': 'gvs', 'money': 850144, 'bank_name': '中国工商银行'} ,
+536910 : {'username': 'sxi', 'password': 123456, 'country': 'xsa', 'province': 'rpd', 'street': 'wca', 'door': 'nxq', 'money': 816053, 'bank_name': '中国工商银行'} ,
+100315 : {'username': 'bxz', 'password': 123456, 'country': 'gua', 'province': 'rzo', 'street': 'iqj', 'door': 'cfb', 'money': 574109, 'bank_name': '中国工商银行'} ,
+366753 : {'username': 'aqu', 'password': 123456, 'country': 'pzv', 'province': 'brx', 'street': 'iyr', 'door': 'hsf', 'money': 759382, 'bank_name': '中国工商银行'} ,
+635212 : {'username': 'pua', 'password': 123456, 'country': 'icd', 'province': 'lhy', 'street': 'zxs', 'door': 'srt', 'money': 470284, 'bank_name': '中国工商银行'}
+}
+bank_name="郑州分行"
+num=0
+money=0
+def bank_add(account,username,password,country,province,street,door):
+    #字典              键        值
+    if account in bank:
+        return 2
+    elif len(bank)>=100:
+        return 3
+    else:
+        bank[account]={
+            "username":username,
+            "password":password,
+            "country":country,
+            "province":province,
+            "street":street,
+            "door":door,
+            "money":0,
+            "bank_name":bank_name
+        }
+        return 1
+
+def useradd():
+    account=random.randint(100000,999999)
+    username=input("请输入您的姓名")
+    password=int(input("请输入您的密码"))
+    # num=0
+    # for i in range(len(password)):
+    #     num+=1
+    # print(num*"*")
+    print("请输入您的具体位置：")
+    country=input("\t\t请输入您的国家")
+    province=input("\t\t请输入您的省份")
+    street = input("\t\t请输入您的街道")
+    door=input("\t\t请输入您的门牌号")
+    return bank_add(account,username,password,country,province,street,door)
+
+
+def putmoney(account,money_number1):
+    # print(account,money_number1)
+    if account in bank:
+       bank[account]['money']+=money_number1
+       print(bank[account]['money'])
+       return 0
+    else:
+        return 1
+#
+# def getmoney(account,password,money_number2):
+#     if account in bank:
+#         if password==bank[account]['password'] :
+#             if bank[account]['money']>money_number2:
+#                 #return 0
+#                 bank[account]['money']-=money_number2
+#                 print(bank[account]['money'])
+#             else:
+#                 return 3
+#         else:
+#             return 2
+#     else:
+#         return 1
+#
+# def change_pay(out_account,in_account,out_password,out_money):
+#     if out_account and in_account in bank:
+#         if out_password==bank[account]['password']:
+#             if bank[account]['money']>out_money:
+#                 out_account-=out_money
+#                 in_account+=out_money
+#             else:
+#                 return 3
+#         else:
+#             return 2
+#     else:
+#         return 1
+#
+# def inquire(account,password):
+#     if account in bank:
+#         if password==bank[account]['password'] :
+#             print("当前帐号",bank[account]['account'])
+#             print("密码",bank[account]['password'])
+#             print("余额",bank[account]['money'])
+#             print("居住地址",bank[account][''])
+#             print("当前账户开户行",bank[account]['bank_name'])
+#         else:
+#             print(bank[account]['password'])
+#     else:
+#         print("该用户不存在")
+#
+# while True:
+#     num1 = int(input('请选择你要办理的业务'))
+#     if num1==1:
+#         print(useradd())
+#         print(bank)
+#     elif num1==2:
+#         account=int(input("请输入用户账号："))
+#         money_number1=int(input("请输入存款的金额："))
+#         print(putmoney(account,money_number1))
+#     elif num1==3:
+#         account = int(input("请输入用户账号："))
+#         password=int(input('请输入密码'))
+#         money_number2 = int(input("请输入取款的金额："))
+#         print(getmoney(account,password,money_number2))
+#     elif num1==4:
+#         out_account=int(input("请输入转出账号："))
+#         in_account=int(input("请输入转入账号："))
+#         out_password=int(input("请输入转出账户密码："))
+#         out_money=int(input("请输入转出的金额："))
+#         print(change_pay(out_account,in_account,out_password,out_money))
+#     elif num1==5:
+#         account = int(input("请输入用户账号："))
+#         password= int(input('请输入密码'))
+#         print(account,password)
+#     elif num1==6:
+#         print("谢谢您的光临！")
+#             print(bank)
+#         break
+#     else:
+#         print('别瞎输')
+
+
+def bankTest():
+    return None
+
+
+def bank_addUser():
+    return None
